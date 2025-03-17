@@ -17,13 +17,27 @@ async function main() {
     },
   });
 
-  await prisma.task.create({
-    data: {
-      title: "Completar proyecto",
-      description: "Terminar el proyecto de aplicación web con Express, React y Prisma",
-      status: TaskStatus.TO_DO,
-      userId: user.id,
-    },
+  await prisma.task.createMany({
+    data: [
+      {
+        title: "Completar proyecto",
+        description: "Terminar el proyecto de aplicación web con Express, React y Prisma",
+        status: TaskStatus.TO_DO,
+        userId: user.id,
+      },
+      {
+        title: "Crear frontend",
+        description: "Desarrollar la interfaz de usuario con React",
+        status: TaskStatus.DONE,
+        userId: user.id,
+      },
+      {
+        title: "Crear backend",
+        description: "Desarrollar el servidor con Express y Prisma",
+        status: TaskStatus.IN_PROGRESS,
+        userId: user.id,
+      },
+    ],
   });
 }
 

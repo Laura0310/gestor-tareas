@@ -13,6 +13,11 @@ Sigue estos pasos para ejecutar el proyecto:
 
 1. Clona este repositorio
 
+```bash
+git clone https://github.com/Laura0310/gestor-tareas.git
+```
+
+
 2. Construye las imágenes de Docker
 
 ```bash

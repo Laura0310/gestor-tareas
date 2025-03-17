@@ -47,11 +47,15 @@ Esta aplicación ha sido desarrollada como parte de la prueba técnica para Erco
 
 1. Clonar el repositorio:
 
+```bash
+git clone https://github.com/Laura0310/gestor-tareas.git
+```
+
 2. Instalar dependencias del frontend:
-   ```bash
-   cd client
-   npm install
-   ```
+```bash
+cd client
+npm install
+```
 
 ## Ejecución
 

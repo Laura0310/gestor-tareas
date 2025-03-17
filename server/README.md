@@ -61,13 +61,23 @@ El backend está estructurado en tres capas principales:
 
 ### 1. Clonar el repositorio
 
-### 2. Instalar dependencias
+```bash
+git clone https://github.com/Laura0310/gestor-tareas.git
+```
+
+### 2. Acceder al directorio del servidor
+
+```bash
+cd gestor-tareas/server
+```
+
+### 3. Instalar dependencias
 
 ```sh
 npm install
 ```
 
-### 3. Configurar variables de entorno
+### 4. Configurar variables de entorno
 
 Crea un archivo `.env` en el directorio raíz y añade:
 
@@ -77,13 +87,13 @@ JWT_SECRET="supersecreto"
 PORT=5001
 ```
 
-### 4. Configurar la base de datos
+### 5. Configurar la base de datos
 
 ```sh
 npx prisma migrate dev --name init
 ```
 
-### 5. Ejecutar la aplicación
+### 6. Ejecutar la aplicación
 
 ```sh
 npm run dev
