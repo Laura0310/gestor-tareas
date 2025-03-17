@@ -1,0 +1,74 @@
+services:
+  # PostgreSQL database
+  postgres:
+    image: postgres:14-alpine
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=LauraAcosta
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+  # Backend API (Express)
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: server
+    restart: always
+    depends_on:
+      - postgres
+    environment:
+      - DATABASE_URL=postgresql://LauraAcosta:password@postgres:5432/postgres?schema=public
+      - JWT_SECRET=supersecreto
+      - PORT=5001
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./server/src:/app/src
+      - ./server/prisma:/app/prisma
+    networks:
+      - app-network
+    command: >
+      sh -c "
+        echo 'Esperando que la base de datos esté lista...' &&
+        sleep 5 &&
+        echo 'Ejecutando migraciones de Prisma...' &&
+        npx prisma migrate deploy &&
+        echo 'Ejecutando seed de Prisma...' &&
+        npx prisma db seed &&
+        echo 'Iniciando la aplicación...' &&
+        npm run dev
+      "
+
+  # Frontend (React)
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client
+    restart: always
+    depends_on:
+      - server
+    environment:
+      - VITE_API_URL=http://localhost:5001/api
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/src:/app/src
+      - ./client/public:/app/public
+    networks:
+      - app-network
+    command: npm run dev
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  postgres_data:

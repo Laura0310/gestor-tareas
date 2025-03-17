@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-merriweather: "Merriweather", serif;
+    --font-montserrat: "Montserrat", sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-merriweather);
+  }
+
+  p,
+  label,
+  span {
+    font-family: var(--font-montserrat);
+  }
+
+  html {
+    font-family: var(--font-montserrat);
+  }
+}
+
+@layer utilities {
+  .font-merriweather {
+    font-family: var(--font-merriweather);
+  }
+
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+}
